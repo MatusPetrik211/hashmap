@@ -1,6 +1,7 @@
 export function LinkedList() {
   return {
     head: null,
+    isLinkedList: true,
     append(value) {
       value = Node(value);
       if (!this.head) {

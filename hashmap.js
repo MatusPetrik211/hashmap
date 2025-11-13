@@ -23,15 +23,51 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
         throw new Error("Trying to access index out of bounds");
       }
 
-      this.buckets[index] = [key, value]
+      if (this.buckets[index] === undefined) {
+        this.buckets[index] = [key, value]
+      } else if (this.buckets[index][0] === key) {
+        this.buckets[index] = [key, value]
+      } else if (this.buckets[index].isLinkedList) {
+        this.buckets[index].append([key, value]);
+        console.log("adding to the list");
+      }
+        else if (this.buckets[index][0] !== key) {
+        console.log("creating the list");
+        let linkedList = LinkedList();
+        linkedList.append(this.buckets[index]);
+        linkedList.append([key, value]);
+        this.buckets[index] = linkedList;
+        linkedList = LinkedList();
+      } 
 
-      console.log(this.buckets)
+
+      for (let i = 0; i < this.buckets.length; i++) {
+        console.log(this.buckets[i]);
+      }
+
+      // for (let i = 0; i < this.buckets.length; i++) {
+
+
+      //   if (this.buckets[i].isLinkedList) {
+      //     if (this.buckets[i].contains(key)) {
+
+      //     }
+      //   }
+      // }
+
+      // const linkedList = LinkedList();
+      // console.log(linkedList.isLinkedList);
+      // linkedList.append([key, value])
+      // this.buckets[index] = linkedList;
+
+      // console.log(this.buckets)
     }, 
   };
 }
 
 let hashmap = HashMap();
-hashmap.set("fdsfdsf", 0);
+hashmap.set("Carlos", "I am the old value");
+hashmap.set("Carlos", "I am the new value");
 hashmap.set("bus", 1);
 hashmap.set("olej", 2);
 hashmap.set("new", 3);
