@@ -75,15 +75,18 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
         }
       }
 
-      return this.buckets[index][1]
-    }
+      console.log(this.buckets[index][0]);
+      if (this.buckets[index][0] == key) {
+        return this.buckets[index][1]
+      }
+    },
   };
 }
 
 let hashmap = HashMap();
 hashmap.set("Carlos", "I am the old value");
 hashmap.set("Carlos", "I am the new value");
-// hashmap.set("bus", 1);
+hashmap.set("bus", 1);
 hashmap.set("olej", 2);
 hashmap.set("new", 3);
 hashmap.set("old", 4);
@@ -98,3 +101,4 @@ console.log(hashmap.get("bool"));
 console.log(hashmap.get("for"));
 console.log(hashmap.get("new"));
 console.log(hashmap.get("none"));
+console.log(hashmap.get("neww"));
