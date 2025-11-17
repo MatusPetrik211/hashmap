@@ -127,9 +127,28 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
         this.buckets[index] = undefined;
         return true
       }
+    },
+    length() {
+      let len = 0;
+
+      for (const bucket of this.buckets) {
+        if (bucket === undefined) {
+          continue
+        } else if (bucket.isLinkedList) {
+          len += bucket.size();
+        } else {
+          len++;
+        }
+      }
+
+      return len
     }
   };
 }
+
+// possible thing to do:
+// change it so that when an element is only one in the linked list due to removing make it 
+// a single pair not linked list
 
 let hashmap = HashMap();
 hashmap.set("Carlos", "I am the old value");
@@ -158,13 +177,17 @@ console.log(hashmap.has("bol"));
 console.log(hashmap.has("ol"));
 console.log(hashmap.has("b"));
 
-console.log(hashmap.remove("bool"))
-console.log(hashmap.remove("new"))
-console.log(hashmap.remove("nothing"))
+// console.log(hashmap.remove("bool"))
+// console.log(hashmap.remove("new"))
+// console.log(hashmap.remove("nothing"))
 
 hashmap.set("gl", 67);
 hashmap.set("sdfsd", 67);
 hashmap.set("gsfsdf", 67);
+
+console.log(hashmap.length());
+console.log(hashmap.remove("olej"));
+console.log(hashmap.length());
 
 
 
