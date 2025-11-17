@@ -10,7 +10,7 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
       const primeNumber = 31;
 
       for (let i = 0; i < key.length; i++) {
-        hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % capacity;
+        hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
       }
       
       // console.log(hashCode)
@@ -24,7 +24,7 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
       }
 
       // to do: check if the key is in the linked list already if yes update it
-      if (this.buckets[index] === undefined || this.buckets[index][0] === key) {
+      if (this.buckets[index] === undefined) {
         this.buckets[index] = [key, value];
       } else if (this.buckets[index].isLinkedList) {
         let tmp = this.buckets[index].getHead();
@@ -40,7 +40,10 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
           this.buckets[index].append([key, value]);
         }
         console.log("adding to the list");
-      } else if (this.buckets[index][0] !== key) {
+      } else if (this.buckets[index][0] === key) {
+        this.buckets[index] = [key, value];
+      }
+      else if (this.buckets[index][0] !== key) {
         console.log("creating the list");
         let linkedList = LinkedList();
         linkedList.append(this.buckets[index]);
@@ -64,7 +67,7 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
         return null
       } else if (this.buckets[index].isLinkedList) {
         let tmp = this.buckets[index].getHead();
-        while (true) {
+        while (tmp) {
           if (tmp.value[0] === key) {
             // console.log(tmp)
             // console.log(tmp.value[0])
@@ -75,10 +78,12 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
         }
       }
 
-      console.log(this.buckets[index][0]);
+      // console.log(this.buckets[index][0]);
       if (this.buckets[index][0] == key) {
         return this.buckets[index][1]
       }
+
+      return null
     },
   };
 }
