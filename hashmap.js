@@ -76,15 +76,58 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
           }
           tmp = tmp.next
         }
-      }
-
-      // console.log(this.buckets[index][0]);
-      if (this.buckets[index][0] == key) {
+      } else if (this.buckets[index][0] == key) {
         return this.buckets[index][1]
       }
 
       return null
     },
+    has(key) {
+      const index = this.hash(key);
+
+      if (this.buckets[index] === undefined) {
+        return false
+      }
+      else if (this.buckets[index].isLinkedList) {
+        let tmp = this.buckets[index].getHead();
+          while (tmp) {
+            if (tmp.value[0] === key) {
+              return true
+            }
+          tmp = tmp.next;
+        } 
+        return false
+      } else if (this.buckets[index][0] === key){
+        return true
+      } else {
+        return false
+      }
+    },
+    remove(key) {
+      if (!this.has(key)) {
+        return false
+      }
+
+      const index = this.hash(key);
+
+      if (this.buckets[index].isLinkedList) {
+        let tmp = this.buckets[index].getHead();
+        let i = 0
+
+        while (tmp) {
+          if (tmp.value[0] === key) {
+            this.buckets[index].removeAt(i);
+            return true
+          }
+          i++;
+          tmp = tmp.next;
+        }
+        return false
+      } else {
+        this.buckets[index] = undefined;
+        return true
+      }
+    }
   };
 }
 
@@ -101,9 +144,28 @@ hashmap.set("bool", 7);
 hashmap.set("new", 5);
 
 
-console.log(hashmap.get("Carlos"));
-console.log(hashmap.get("bool"));
-console.log(hashmap.get("for"));
-console.log(hashmap.get("new"));
-console.log(hashmap.get("none"));
-console.log(hashmap.get("neww"));
+// console.log(hashmap.get("Carlos"));
+// console.log(hashmap.get("bool"));
+// console.log(hashmap.get("for"));
+// console.log(hashmap.get("new"));
+// console.log(hashmap.get("none"));
+// console.log(hashmap.get("neww"));
+
+console.log(hashmap.has("new"));
+console.log(hashmap.has("old"));
+console.log(hashmap.has("bool"));
+console.log(hashmap.has("bol"));
+console.log(hashmap.has("ol"));
+console.log(hashmap.has("b"));
+
+console.log(hashmap.remove("bool"))
+console.log(hashmap.remove("new"))
+console.log(hashmap.remove("nothing"))
+
+hashmap.set("gl", 67);
+hashmap.set("sdfsd", 67);
+hashmap.set("gsfsdf", 67);
+
+
+
+
