@@ -142,7 +142,10 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
       }
 
       return len
-    }
+    },
+    clear() {
+      this.buckets = new Array(this.capacity);
+    },
   };
 }
 
@@ -174,7 +177,7 @@ console.log(hashmap.has("new"));
 console.log(hashmap.has("old"));
 console.log(hashmap.has("bool"));
 console.log(hashmap.has("bol"));
-console.log(hashmap.has("ol"));
+console.log(hashmap.has("ol"));  
 console.log(hashmap.has("b"));
 
 // console.log(hashmap.remove("bool"))
@@ -189,6 +192,8 @@ console.log(hashmap.length());
 console.log(hashmap.remove("olej"));
 console.log(hashmap.length());
 
+hashmap.clear();
+hashmap.set("globbbb", 67);
 
 
 
