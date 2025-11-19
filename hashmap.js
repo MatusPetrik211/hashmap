@@ -146,6 +146,32 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
     clear() {
       this.buckets = new Array(this.capacity);
     },
+    keys() {
+      pairs = [];
+
+      for (const bucket of this.buckets) {
+        if (bucket === undefined) {
+          continue
+        } else if (bucket.isLinkedList) {
+
+        } else {
+          arr.append();
+        }
+      }
+    },
+    values() {
+      pairs = [];
+
+      for (const bucket of this.buckets) {
+        if (bucket === undefined) {
+          continue
+        } else if (bucket.isLinkedList) {
+
+        } else {
+          arr.append();
+        }
+      } 
+    }
   };
 }
 
