@@ -147,30 +147,29 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
       this.buckets = new Array(this.capacity);
     },
     keys() {
-      pairs = [];
-
-      for (const bucket of this.buckets) {
-        if (bucket === undefined) {
-          continue
-        } else if (bucket.isLinkedList) {
-
-        } else {
-          arr.append();
-        }
-      }
+      return this.entries().map((pair) => (pair[0]));
     },
     values() {
-      pairs = [];
+      return this.entries().map((pair) => (pair[1]));
+    },
+    entries() {
+      const pairs = [];
 
       for (const bucket of this.buckets) {
         if (bucket === undefined) {
           continue
         } else if (bucket.isLinkedList) {
-
+          let tmp = bucket.getHead();
+          while (tmp) {
+            pairs.push(tmp.value);
+            tmp = tmp.next;
+          }
         } else {
-          arr.append();
+          pairs.push(bucket);
         }
       } 
+
+      return pairs;
     }
   };
 }
@@ -218,8 +217,9 @@ console.log(hashmap.length());
 console.log(hashmap.remove("olej"));
 console.log(hashmap.length());
 
-hashmap.clear();
+// hashmap.clear();
 hashmap.set("globbbb", 67);
 
-
-
+console.log(hashmap.entries());
+console.log(hashmap.keys());
+console.log(hashmap.values());
