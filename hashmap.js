@@ -147,10 +147,42 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
       this.buckets = new Array(this.capacity);
     },
     keys() {
-      return this.entries().map((pair) => (pair[0]));
+      const keys = [];
+
+      for (const bucket of this.buckets) {
+        if (bucket === undefined) {
+          continue
+        } else if (bucket.isLinkedList) {
+          let tmp = bucket.getHead();
+          while (tmp) {
+            keys.push(tmp.value[0]);
+            tmp = tmp.next;
+          }
+        } else {
+          keys.push(bucket[0]);
+        }
+      } 
+
+      return keys;
     },
     values() {
-      return this.entries().map((pair) => (pair[1]));
+      const values = [];
+
+      for (const bucket of this.buckets) {
+        if (bucket === undefined) {
+          continue
+        } else if (bucket.isLinkedList) {
+          let tmp = bucket.getHead();
+          while (tmp) {
+            values.push(tmp.value[1]);
+            tmp = tmp.next;
+          }
+        } else {
+          values.push(bucket[1]);
+        }
+      } 
+
+      return values;
     },
     entries() {
       const pairs = [];
