@@ -39,12 +39,12 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
         if (!inList) {
           this.buckets[index].append([key, value]);
         }
-        console.log("adding to the list");
+        // console.log("adding to the list");
       } else if (this.buckets[index][0] === key) {
         this.buckets[index] = [key, value];
       }
       else if (this.buckets[index][0] !== key) {
-        console.log("creating the list");
+        // console.log("creating the list");
         let linkedList = LinkedList();
         linkedList.append(this.buckets[index]);
         linkedList.append([key, value]);
@@ -57,6 +57,23 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
           console.log(this.buckets[i].toString());
         } else {
           console.log(this.buckets[i]);
+        }
+      }
+      console.log("------------------------------------------");
+
+      if (this.loadFactor * this.capacity < this.length()) {
+        console.log(this.length());
+        console.log(this.loadFactor * this.capacity)
+        console.log("true");
+        this.capacity *= 2;
+        this.buckets = new Array(this.capacity);
+        const entries = this.entries();
+
+        for (const entry of entries) {
+          let key = entry[0];
+          let value = entry[1];
+
+          this.set(key, value);
         }
       }
     }, 
@@ -210,48 +227,70 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
 // change it so that when an element is only one in the linked list due to removing make it 
 // a single pair not linked list
 
-let hashmap = HashMap();
-hashmap.set("Carlos", "I am the old value");
-hashmap.set("Carlos", "I am the new value");
-hashmap.set("bus", 1);
-hashmap.set("olej", 2);
-hashmap.set("new", 3);
-hashmap.set("old", 4);
-hashmap.set("loop", 5);
-hashmap.set("for", 6);
-hashmap.set("bool", 7);
-hashmap.set("new", 5);
+// let hashmap = HashMap();
+// hashmap.set("Carlos", "I am the old value");
+// hashmap.set("Carlos", "I am the new value");
+// hashmap.set("bus", 1);
+// hashmap.set("olej", 2);
+// hashmap.set("new", 3);
+// hashmap.set("old", 4);
+// hashmap.set("loop", 5);
+// hashmap.set("for", 6);
+// hashmap.set("bool", 7);
+// hashmap.set("new", 5);
 
 
-// console.log(hashmap.get("Carlos"));
-// console.log(hashmap.get("bool"));
-// console.log(hashmap.get("for"));
-// console.log(hashmap.get("new"));
-// console.log(hashmap.get("none"));
-// console.log(hashmap.get("neww"));
+// // console.log(hashmap.get("Carlos"));
+// // console.log(hashmap.get("bool"));
+// // console.log(hashmap.get("for"));
+// // console.log(hashmap.get("new"));
+// // console.log(hashmap.get("none"));
+// // console.log(hashmap.get("neww"));
 
-console.log(hashmap.has("new"));
-console.log(hashmap.has("old"));
-console.log(hashmap.has("bool"));
-console.log(hashmap.has("bol"));
-console.log(hashmap.has("ol"));  
-console.log(hashmap.has("b"));
+// console.log(hashmap.has("new"));
+// console.log(hashmap.has("old"));
+// console.log(hashmap.has("bool"));
+// console.log(hashmap.has("bol"));
+// console.log(hashmap.has("ol"));  
+// console.log(hashmap.has("b"));
 
-// console.log(hashmap.remove("bool"))
-// console.log(hashmap.remove("new"))
-// console.log(hashmap.remove("nothing"))
+// // console.log(hashmap.remove("bool"))
+// // console.log(hashmap.remove("new"))
+// // console.log(hashmap.remove("nothing"))
 
-hashmap.set("gl", 67);
-hashmap.set("sdfsd", 67);
-hashmap.set("gsfsdf", 67);
+// hashmap.set("gl", 67);
+// hashmap.set("sdfsd", 67);
+// hashmap.set("gsfsdf", 67);
 
-console.log(hashmap.length());
-console.log(hashmap.remove("olej"));
-console.log(hashmap.length());
+// console.log(hashmap.length());
+// console.log(hashmap.remove("olej"));
+// console.log(hashmap.length());
 
-// hashmap.clear();
-hashmap.set("globbbb", 67);
+// // hashmap.clear();
+// hashmap.set("globbbb", 67);
 
-console.log(hashmap.entries());
-console.log(hashmap.keys());
-console.log(hashmap.values());
+// console.log(hashmap.entries());
+// console.log(hashmap.keys());
+// console.log(hashmap.values());
+
+const test = HashMap();
+
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
+
+console.log(test.length());
+
+test.set('apple', 'cyan')
+test.set('hat', 'grey')
+
+console.log(test.length());
