@@ -65,15 +65,13 @@ function HashMap(loadFactor = 0.75, capacity = 16) {
         console.log(this.length());
         console.log(this.loadFactor * this.capacity)
         console.log("true");
+        const entries = this.entries();
         this.capacity *= 2;
         this.buckets = new Array(this.capacity);
-        const entries = this.entries();
 
         for (const entry of entries) {
-          let key = entry[0];
-          let value = entry[1];
 
-          this.set(key, value);
+          this.set(entry[0], entry[1]);
         }
       }
     }, 
@@ -294,3 +292,41 @@ test.set('apple', 'cyan')
 test.set('hat', 'grey')
 
 console.log(test.length());
+
+test.set('moon', 'silver')
+
+test.set('hat', 'yellowish');
+test.set('lion', 'brown');
+test.set('dog', 'golden');
+
+console.log(test.get('ice cream')); // white
+console.log(test.get('lion')); // brown
+console.log(test.get('apple')); // cyan
+
+console.log(test.has('dog')); // T
+console.log(test.has('apple')); // T
+console.log(test.has('adadasda')); // F
+
+console.log(test.length());
+
+console.log(test.remove('lion'));
+console.log(test.remove('sadsadasd'));
+console.log(test.remove('apple'));
+
+console.log(test.length());
+
+test.set('apple', 'poland');
+
+console.log(test.entries());
+console.log(test.keys());
+console.log(test.values());
+
+test.clear()
+
+console.log(test.entries());
+console.log(test.keys());
+console.log(test.values());
+
+
+
+
